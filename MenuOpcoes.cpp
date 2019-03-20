@@ -27,39 +27,39 @@ int main()
 
         switch (continuar)
 			{
-						case 1:
-								oi();
+				case 1:
+					oi();
 
-					break;
+			break;
 
-						case 2:
+				case 2:
 
-                             familia();
+					familia();
 
-					break;
+			break;
 
-						case 3:
+				case 3:
 
-						  	tudobem();
+					tudobem();
 
-                    break;
+			break;
 
-						case 4:
+				case 4:
 
-							sair();
+					sair();
 
-					break;
+			break;
 
 				default:
 
-                    printf("Opcao invalida!\n");
-                    system("cls");
+					printf("Opcao invalida!\n");
+					system("cls");
 
-                break;
+			break;
 
 			}
 
-	  }while(continuar != 4);
+		}while(continuar != 4);
 
    return 0;
 
@@ -77,22 +77,22 @@ void tudobem()
 {
 	printf("RoBot_says(^.^):tudo bem?\n");
 	system("pause");
-    system("cls");
+	system("cls");
 
 }
 void familia()
 {
 
-    printf("RoBot_says(^.^):como vai a familia?\n");
-    system("pause");
-    system("cls");
+	printf("RoBot_says(^.^):como vai a familia?\n");
+	system("pause");
+	system("cls");
 
 }
 void sair()
 {
 	printf("RoBot_says(^.^):Adeus ;( \n");
 	system("pause");
-    system("cls");
+	system("cls");
 }
 
 
