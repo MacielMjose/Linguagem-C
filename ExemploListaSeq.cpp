@@ -27,16 +27,26 @@ typedef struct {                   // registro para uma pessoa
        int  codigo;
        char nome[30];
 }INFORMACAO;
-       
+
+
+/*       
 typedef struct {
        INFORMACAO info[N_MAX];    // dados do registro
        int f;                     // n?mero de registro(s) ocupado(s) na estrutura
 }NODO;                            // estrutura do tipo NODO
+*/
+
+typedef struct LISTA {
+       INFORMACAO info;    // dados do registro
+       struct LISTA *prox;          // ponteiro do tipo LISTA que aponta para o próximo registro
+}LISTAENC;                          // estrutura dinamica tipo lista encadeada
+
 
 /***********************************************/
 /* Defini??o das Fun??es                       */
 /***********************************************/
-void entrada_dados   ( INFORMACAO *aux ); // leitura dos dados de entrada
+void entrada_dados   ( LISTAENC *prox ); // leitura dos dados de entrada
+void cria_listaenc (LISTAENC * *l);
 void imprime_lista   ( NODO lista );  // visualiza??o da lista em tela
 void cria_lista      ( int *fim );    // inicializa lista com tamanho 0
 void inclui_fim      ( NODO *lista ); // inclui um novo registro no final da lista
@@ -61,7 +71,7 @@ int f ( NODO l );
 int main( void )
 {
     int op, i;           // op??o do menu
-    NODO lista;       // vari?vel do tipo lista sequencial = vetor de registros
+    LISTAENC *l;       // vari?vel do tipo LISTAENC
     setlocale( LC_ALL, "Portuguese" );
 
     while( 1 ){
@@ -165,6 +175,17 @@ int main( void )
 } // fim do programa principal
 
 
+/************************************************
+ * cria_listaenc                                *
+ * objetivo: cria uma lista encadeada           *
+ * entrada : registro i (auxiliar)      	    *
+ * sa?da   : NULL lista lista inicializada	    *
+ ************************************************/
+ 
+void cria_listaenc (LISTAENC * *l)
+{
+	*l = null; //lista criada, o inicio é null	
+}
 
 /************************************************
  * entrada_dados                                *
@@ -174,13 +195,16 @@ int main( void )
  ************************************************/
 void entrada_dados( INFORMACAO *aux )
 {
-    printf( "\n\n Digite o c?digo: " );
-    fflush( stdin );                             // limpa buffer do teclado, funciona junto com entrada de dados
-    scanf( "%d", &aux->codigo );
+   
+    	printf("\n informe o codigo:");		// limpa buffer do teclado, funciona junto com entrada de dados   
+	 	fflush( stdin );  
+		scanf("%i",&no->info.codigo);
 
-    printf( "\n Digite o nome: " );
-    fflush( stdin );     
-    gets( aux->nome );
+		
+		/*printf( "\n Digite o nome: " );
+		fflush( stdin );  
+		scanf("")*/
+		   
 }
 
 
@@ -226,17 +250,42 @@ void cria_lista( int *fim ){
  * entrada : lista                              *
  * sa?da   : lista com novo elemento            *
  ************************************************/
-void inclui_fim( NODO *lista ){
+void inclui_fim( LISTAENC *l ){
+	
+	 LISTAENC * no = (LISTAENC *)malloc(sizeof(LISTAENC)); //alocar memoria para um registro do tipo LISTAENC
+	 
+	 if( no == NULL      ) //verifica se o valor do enderço que no guarda é null, isso signifca que naoc onseguiu alocar memoria
+	 {
+		printf("Nao existe espaço na maemoria para alocação!\n");
+	 }
+	 else
+	 {
+	 	entrada_dados(no);             //pasa o no para a funçãoi de entrada de dados
+	 	
+	 	no->prox = NULL;
+	 	
+	 	if(*l == NULL)  // lista vazia
+	 	
+	 		*l = no;   //l recebe o endereço com espaço na memoria fornecido pelo Maclloc
+	 		
+	 		else{                                    //achar o null da lista para verificar se chegou no fim
+	 				 
+	 				 LISTAENC *p;   //~variavel do tipo LISTAENC para armazenar o endereço de L para que o mesmo nao seja perdido
+	 				
+	 				 p* = *l;   
+	 				 
+	 				 while (p->prox != NULL)   //percorrer a lista enquanto p não encontrar o ultimo no caso NULL
+	 				 
+					  		p = p->prox; // p avança para o proximo registro
+	 				 
+	 				 p->prox = no; 				//novo registro foi inserido na lista, o proximo de p (p->prox) recebe no, que é NULL
+	 				 	
+			 }
+	 		
+	 		printf("\n Registro foi inserido!");
+	 	
+	 }
      
-    if( lista->f == N_MAX )                     // verifica se a lista est? cheia
-        printf( "\n Lista cheia!" );
-    else{
-        INFORMACAO aux;                        // auxiliar para a entrada de dados
-        entrada_dados( &aux );                 // l? dados, entrada
-        lista->info[ lista->f ] = aux;         // inclui dados ao final da lista
-        lista->f++;                            // incrementa o tamanho da lista
-        printf( "\n Registro inclu?do no fim!" );
-    }
 }
 
 
